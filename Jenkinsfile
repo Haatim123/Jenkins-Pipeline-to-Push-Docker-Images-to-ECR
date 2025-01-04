@@ -10,7 +10,7 @@ pipeline {
             steps {
                 sh 'curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip'
                 sh 'unzip -o awscliv2.zip'  // Automatically overwrite files if prompted
-                sh './aws/install'
+                sh './aws/install --update'
             }
         }
         stage("Run app on Docker"){
