@@ -6,21 +6,11 @@ pipeline {
         PATH="/usr/local/bin/:${env.PATH}"
     }
     stages {
-        stage('Install AWS CLI') {
+        stage("Install AWS CLI") {
             steps {
-                sh '''
-                # Install dependencies
-                sudo apt update
-                sudo apt install -y curl unzip
-                
-                # Download and install AWS CLI v2
-                curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-                unzip awscliv2.zip
-                sudo ./aws/install
-                
-                # Verify installation
-                aws --version
-                '''
+                sh 'curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip'
+                sh 'unzip -o awscliv2.zip'  // Automatically overwrite files if prompted
+                sh './aws/install'
             }
         }
         stage("Run app on Docker"){
